@@ -1,0 +1,63 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+
+{% block banner-slider %}
+<div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'myapp/images/banner/b22.jpg' %}" class="d-block w-100" alt="banner image" height=450 style="object-fit:cover;">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'myapp/images/banner/cheeze3.jpg' %}" class="d-block w-100" alt="banner image"  height=450 style="object-fit:cover;">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'myapp/images/banner/dairy.jpg' %}" class="d-block w-100" alt="banner image"  height=450 style="object-fit:cover;">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{% endblock banner-slider %}
+
+{% block main-content %}
+    <div class="container" mt-3>
+        <br>
+        <h2 class="text-center">About Us</h2>
+        <br>
+        <div class="row container">
+            <p class="fs-5 text-center">
+                Welcome to Pankaj Dairy Mart, your one-stop shop for high-quality dairy products delivered straight to your doorstep.
+
+                At Pankaj Dairy Mart, we are passionate about providing our customers with the freshest and finest dairy products available. Whether you're looking for farm-fresh milk, artisanal cheeses, or creamy yogurts, we have everything you need to satisfy your dairy cravings.
+
+                Our journey began with a simple goal: to connect dairy farmers with consumers and make it easy for everyone to access the best dairy products on the market. We work directly with local dairy farms and producers to ensure that every product we offer meets our strict standards of quality, freshness, and taste.
+            </p>
+        </div>
+
+        <br><br>
+        <h2 class="text-center">Mission</h2>
+        <br>
+        <div class="row container">
+            <p class="fs-5 text-center">
+                At Pankaj Dairy Mart, our mission is to provide our customers with the freshest and highest-quality dairy products while supporting local farmers and promoting sustainable agriculture practices.
+
+                We are committed to ensuring that every product we offer meets the highest standards of freshness, taste, and nutritional value. By supporting local dairy farmers who practice sustainable and ethical farming methods, we aim to minimize our environmental impact and promote animal welfare.
+
+                Our goal is to make it easy and convenient for our customers to access the best dairy products through our user-friendly online platform and prompt delivery services. We are dedicated to providing exceptional customer service and ensuring that every shopping experience with us is seamless, enjoyable, and fulfilling. With our passion for dairy excellence and commitment to our customers and community, we aim to become the preferred destination for all your dairy needs.
+            </p>
+        </div>
+    </div>
+<br><br>
+{% endblock main-content %}

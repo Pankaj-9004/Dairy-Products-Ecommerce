@@ -1,0 +1,75 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+{% block title %}Shopping Cart{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        {% if cart %}
+        <div class="col-12 text-center mb-5">
+            <h1 class="display-4 text-primary">Shopping Cart</h1>
+            <p class="lead text-muted">Review your items and proceed to checkout</p>
+        </div>
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h3 class="text-center text-success">Cart Items</h3>
+                    {% for i in cart %}
+                        <div class="row my-4 p-3 rounded shadow-sm" style="background-color: #e9f7fd;">
+                            <div class="col-md-3 text-center">
+                                <img src="{{i.product.product_image.url}}" alt="{{i.product.title}}" class="img-fluid img-thumbnail shadow-sm animated fadeIn" style="max-height: 150px;">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5>{{i.product.title}}</h5>
+                                        <p class="mb-2 text-muted small">{{i.product.description}}</p>
+                                        <div class="d-flex align-items-center my-3">
+                                            <label for="quantity-{{i.product.id}}" class="me-2">Quantity:</label>
+                                            <button class="btn btn-outline-primary btn-sm me-2 minus-cart" pid="{{i.product.id}}"><i class="fas fa-minus"></i></button>
+                                            <span id="quantity-{{i.product.id}}" class="badge bg-primary text-white p-2">{{i.quantity}}</span>
+                                            <button class="btn btn-outline-primary btn-sm ms-2 plus-cart" pid="{{i.product.id}}"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-outline-danger btn-sm remove-cart" pid="{{i.product.id}}">Remove</button>
+                                        <p class="mb-0 mt-2"><strong>Rs. {{i.product.discounted_price}}</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h3 class="text-center text-success">Summary</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">Amount: <span id="amount" class="badge bg-info text-white">Rs. {{amount}}</span></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">Shipping Fee: <span class="badge bg-info text-white">Rs. 40.00</span></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Total</strong> <small>(including GST)</small>
+                            </div>
+                            <span id="totalamount" class="badge bg-info text-white"><strong>Rs. {{totalamount}}</strong></span>
+                        </li>
+                    </ul>
+                    <div class="d-grid mt-4">
+                        <a href="{% url 'checkout' %}" class="btn btn-success btn-lg">Place Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center">
+            <h1 class="display-4 text-danger">Cart is Empty</h1>
+            <p class="lead text-muted">Add some items to your cart to see them here</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script src="{% static 'js/cart.js' %}"></script>
+{% endblock main-content %}

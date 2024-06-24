@@ -1,0 +1,48 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+
+{% block main-content %}
+<div class="container my-5">
+  <div class="row">
+    <!-- Welcome message -->
+    <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+      <div class="card bg-light shadow">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">Welcome, <span class="text-capitalize text-primary">{{ request.user }}</span>!</h2>
+          <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-3">
+              <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+              <input type="{{ field.field.widget.input_type }}" class="form-control {% if field.errors %}is-invalid{% endif %}"
+                     id="{{ field.id_for_label }}" name="{{ field.name }}" value="{{ field.value|default_if_none:'' }}">
+              <div class="invalid-feedback">
+                {% for error in field.errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            </div>
+            {% endfor %}
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            </div>
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+            <div class="alert alert-danger mt-3">{{ error }}</div>
+            {% endfor %}
+            {% endif %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} mt-3" role="alert">
+              {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+{% block title %}Address{% endblock title %}
+{% block main-content %}
+<style>
+    .card-custom {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .card-header-custom {
+        background-color: #FFF8E1; /* Light gray */
+        color: #333; /* Dark text color */
+        font-size: 1.2em;
+        padding: 1rem;
+    }
+    .btn-custom {
+        background-color: #FFC0CB; /* Soft pastel pink */
+        color: white;
+    }
+    .btn-custom:hover {
+        background-color: #FF69B4; /* Lighter pink color on hover */
+    }
+    .btn-outline-custom {
+        border-color: #FFC0CB;
+        color: #FFC0CB;
+    }
+    .btn-outline-custom:hover {
+        background-color: #FFC0CB;
+        color: white;
+    }
+    .btn-update {
+        background-color: #FFC0CB; /* Soft pastel pink */
+        color: white;
+    }
+    .btn-update:hover {
+        background-color: #FF69B4; /* Lighter pink color on hover */
+    }
+    .form-label {
+        font-weight: bold;
+    }
+    .form-control:focus {
+        border-color: #FFC0CB;
+        box-shadow: 0 0 5px rgba(255, 192, 203, 0.5);
+    }
+    .add-address-heading {
+        background-color: #FFF8E1; /* Creamy color */
+        padding: 10px;
+        border-radius: 8px 8px 0 0;
+    }
+</style>
+<div class="container my-5">
+    <div class="row">
+        <h3>Welcome <span class="text-capitalize">{{request.user}}</span></h3>
+
+        <div class="col-md-2 border-end">
+            <ul class="list-unstyled">
+                <li class="d-grid mb-2"><a href="{% url 'profile' %}" class="btn btn-outline-custom">Profile</a></li>
+                <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-custom">Address</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-8">
+            <div class="row">
+                {% for i in add %}
+                    <div class="col-sm-6 mb-4">
+                        <div class="card h-100 card-custom">
+                            <div class="card-body">
+                                <h3 class="card-title">Address {{forloop.counter}}</h3>
+                                <p class="card-text">Name: {{i.name}}</p>
+                                <p class="card-text">Locality: {{i.locality}}</p>
+                                <p class="card-text">Mobile: {{i.mobile}}</p>
+                                <p class="card-text">State: {{i.state}}</p>
+                                <p class="card-text">Pincode: {{i.zipcode}}</p>
+                                <p class="text-center"><a href="{% url 'updateaddress' pk=i.id %}" type="button"
+                                                          class="btn btn-update">Update</a></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="col-sm-6 mb-4">
+                    <div class="card h-100 card-custom">
+                        <div class="card-body">
+                            <div class="add-address-heading">
+                                <h3 class="card-title">Add New Address</h3>
+                            </div>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="locality" class="form-label">Locality</label>
+                                    <input type="text" class="form-control" id="locality" name="locality">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="mobile" class="form-label">Mobile</label>
+                                    <input type="text" class="form-control" id="mobile" name="mobile">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="state" class="form-label">State</label>
+                                    <input type="text" class="form-control" id="state" name="state">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="zipcode" class="form-label">Pincode</label>
+                                    <input type="text" class="form-control" id="zipcode" name="zipcode">
+                                </div>
+                                <button type="submit" class="btn btn-custom">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock main-content %}

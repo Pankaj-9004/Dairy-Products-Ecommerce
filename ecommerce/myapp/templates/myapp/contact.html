@@ -1,0 +1,46 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+
+{% block banner-slider %}
+<div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'myapp/images/banner/b22.jpg' %}" class="d-block w-100" alt="banner image" height=450 style="object-fit:cover;">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'myapp/images/banner/cheeze3.jpg' %}" class="d-block w-100" alt="banner image"  height=450 style="object-fit:cover;">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'myapp/images/banner/dairy.jpg' %}" class="d-block w-100" alt="banner image"  height=450 style="object-fit:cover;">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{% endblock banner-slider %}
+
+{% block main-content %}
+    <div class="container mt-3"> 
+        <br>
+        <h2 class="text-center">Contact Us</h2>
+        <br>
+        <div class="row container">
+            <p class="fs-4 text-center">Address :</p>
+            <p class="fs-4 text-center">Contact : </p>
+            <p class="fs-4 text-center">Email :  </p>
+        </div>
+    </div>
+<br><br>
+{% endblock main-content %}

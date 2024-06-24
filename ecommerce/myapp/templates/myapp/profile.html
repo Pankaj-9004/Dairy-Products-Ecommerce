@@ -1,0 +1,107 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+
+{% block main-content %}
+<style>
+    .card-custom {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .card-header-custom {
+        background-color: #FFF8E1; /* Light gray */
+        color: #333; /* Dark text color */
+        font-size: 1.2em;
+        padding: 1rem;
+    }
+    .btn-custom {
+        background-color: #FFC0CB; /* Soft pastel pink */
+        color: white;
+    }
+    .btn-custom:hover {
+        background-color: #FF69B4; /* Lighter pink color on hover */
+    }
+    .btn-outline-custom {
+        border-color: #FFC0CB;
+        color: #FFC0CB;
+    }
+    .btn-outline-custom:hover {
+        background-color: #FFC0CB;
+        color: white;
+    }
+    .form-label {
+        font-weight: bold;
+    }
+    .form-control:focus {
+        border-color: #FFC0CB;
+        box-shadow: 0 0 5px rgba(255, 192, 203, 0.5);
+    }
+</style>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <!-- Welcome message -->
+    <div class="col-12 mb-4 text-center">
+      <div class="welcome-message bg-light p-4 rounded">
+        <h1 class="display-4">Welcome, <span class="text-capitalize">{{ request.user }}</span>!</h1>
+      </div>
+    </div>
+
+    <!-- Sidebar for navigation -->
+    <div class="col-md-4 col-lg-3 mb-4">
+      <div class="card card-custom">
+        <div class="card-header-custom">Navigation</div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <a href="{% url 'profile' %}" class="btn btn-custom w-100">Profile</a>
+            </li>
+            <li class="list-group-item">
+              <a href="{% url 'address' %}" class="btn btn-outline-custom w-100">Address</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main content area for form -->
+    <div class="col-md-6 col-lg-5">
+      <div class="card card-custom">
+        <div class="card-header-custom">Profile Form</div>
+        <div class="card-body">
+          <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-3">
+              <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+              {{ field }}
+              {% if field.errors %}
+              <div class="invalid-feedback d-block">
+                {% for error in field.errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+              {% endif %}
+            </div>
+            {% endfor %}
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-custom">Submit</button>
+            </div>
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+            <div class="alert alert-danger my-3">{{ error }}</div>
+            {% endfor %}
+            {% endif %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} my-3" role="alert">
+              {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
